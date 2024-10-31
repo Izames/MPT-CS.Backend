@@ -3,6 +3,7 @@ package Roaming
 import (
 	"MPT-CS/middleWare"
 	"MPT-CS/middleWare/ResetPassword"
+	"MPT-CS/middleWare/excel_utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -18,6 +19,7 @@ func ServeApplication() {
 	publicRoutes.POST("/sendPin", ResetPassword.SavePinCode)
 	publicRoutes.POST("/checkPin", ResetPassword.CheckPin)
 	publicRoutes.POST("/ChangePassword", ResetPassword.ChangePassword)
+	publicRoutes.POST("/CheckSchedule", excel_utils.CheckSchedule)
 
 	// Группа маршрутов с авторизацией
 	privateRoutes := router.Group("/test")
