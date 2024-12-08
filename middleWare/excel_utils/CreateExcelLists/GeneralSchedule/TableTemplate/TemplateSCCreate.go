@@ -6,7 +6,7 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-func TemplateCreate(file *excelize.File, teachers []string, StartRow int) *excelize.File {
+func TemplateSCCreate(file *excelize.File, teachers []string, StartRow int) *excelize.File {
 
 	file.SetRowHeight("Sheet1", StartRow+1, 10)
 	file.SetRowHeight("Sheet1", StartRow+2, 10)

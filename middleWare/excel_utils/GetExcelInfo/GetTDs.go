@@ -1,7 +1,7 @@
 package GetExcelInfo
 
 import (
-	"MPT-CS/middleWare/excel_utils/TDsParams"
+	TDsParams2 "MPT-CS/middleWare/excel_utils/CreateExcelLists/GeneralSchedule/TDsParams"
 	"MPT-CS/models"
 )
 
@@ -19,9 +19,9 @@ func GetTDs() []models.TeacherDay {
 			}
 		}
 	}
-	TDs = TDsParams.FilterTDs(TDs)
-	TDs = TDsParams.SetTDsColors(TDs)
-	TDs = TDsParams.CheckCoincidens(TDs)
-	TDs = TDsParams.FIOSwap(TDs)
+	TDs = TDsParams2.FilterTDs(TDs)
+	TDs = TDsParams2.SetTDsColors(TDs)
+	TDs = TDsParams2.CheckCoincidens(TDs)
+	TDs = TDsParams2.FIOSwap(TDs)
 	return TDs
 }

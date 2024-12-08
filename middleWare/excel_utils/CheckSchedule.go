@@ -1,24 +1,22 @@
 package excel_utils
 
 import (
+	"MPT-CS/middleWare/excel_utils/CreateExcelLists/GeneralSchedule/SetExcelInfo"
 	"MPT-CS/middleWare/excel_utils/GetExcelInfo"
-	"MPT-CS/middleWare/excel_utils/SetExcelInfo"
-	"MPT-CS/middleWare/excel_utils/TableTemplate"
+	"MPT-CS/middleWare/excel_utils/fileProcessing"
 	"MPT-CS/models"
 	"github.com/gin-gonic/gin"
-	"log"
 	"net/http"
 	"os"
 )
 
 func CheckSchedule(c *gin.Context) {
+
 	if err := c.Request.ParseMultipartForm(32 << 20); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
 	form, err := c.MultipartForm()
-
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -31,12 +29,15 @@ func CheckSchedule(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	file := TableTemplate.CreateTable(teachers)
-	SetExcelInfo.FillTable(file)
-	if err := file.SaveAs("students.xlsx"); err != nil {
-		log.Fatal(err)
-	}
-	c.File("students.xlsx")
+
+	file := CreateTable(teachers)
+	SetExcelInfo.FillTableSC(file)
+
+	files := SliceISC(file)
+	zipFile := fileProcessing.ZippingFiles(file, files)
+
+	file.Close()
+	c.File(zipFile)
 	os.Remove("students.xlsx")
 	for i := 0; i < len(models.SchedulesName); i++ {
 		CloseFiles(models.SchedulesName[i])

@@ -6,7 +6,7 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-func Styler(file *excelize.File, teachers []string, StartRow int) *excelize.File {
+func StylerSC(file *excelize.File, teachers []string, StartRow int) *excelize.File {
 
 	SmallText, _ := file.NewStyle(&excelize.Style{
 		Font: &excelize.Font{

@@ -6,7 +6,7 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-func HeaderCreate(file *excelize.File, tableName string, StartRow int) *excelize.File {
+func HeaderSCCreate(file *excelize.File, tableName string, StartRow int) *excelize.File {
 
 	file.SetCellValue("Sheet1", fmt.Sprintf("%s%d", models.Columns[0], StartRow), tableName)
 	file.SetCellValue("Sheet1", fmt.Sprintf("%s%d", models.Columns[0], StartRow+1), "№")

@@ -1,7 +1,7 @@
 package GetExcelInfo
 
 import (
-	"MPT-CS/middleWare/excel_utils/TDsParams"
+	TDsParams2 "MPT-CS/middleWare/excel_utils/CreateExcelLists/GeneralSchedule/TDsParams"
 	"MPT-CS/models"
 	"fmt"
 	"github.com/xuri/excelize/v2"
@@ -32,10 +32,10 @@ func GetLessons(file *excelize.File, sheet string) []models.TeacherDay {
 				Class, _ := file.GetCellValue(sheet, fmt.Sprintf("%s%d", models.Columns[2+i*3], 9))
 				Teacher, _ := file.GetCellValue(sheet, fmt.Sprintf("%s%d", models.Columns[2+i*3], 10+14*j+n*2))
 				Point, _ := file.GetCellValue(sheet, fmt.Sprintf("%s%d", models.Columns[2+i*3], 10+j*14))
-				match := TDsParams.NumenatorCheck(sheet, i, j, n, file)
+				match := TDsParams2.NumenatorCheck(sheet, i, j, n, file)
 
 				if match {
-					IsEnglish := TDsParams.EnglishCheck(Teacher)
+					IsEnglish := TDsParams2.EnglishCheck(Teacher)
 
 					if IsEnglish {
 						Teacher1EN, Teacher2EN := GetEnPrepodFromString(Teacher)
@@ -47,7 +47,7 @@ func GetLessons(file *excelize.File, sheet string) []models.TeacherDay {
 					}
 
 					Teacher2, _ := file.GetCellValue(sheet, fmt.Sprintf("%s%d", models.Columns[2+i*3], 11+14*j+n*2))
-					IsEnglish = TDsParams.EnglishCheck(Teacher2)
+					IsEnglish = TDsParams2.EnglishCheck(Teacher2)
 					if IsEnglish {
 						Teacher1EN, Teacher2EN := GetEnPrepodFromString(Teacher2)
 						TDs = AddTd(j, LessonNum, Class, Teacher1EN, Point, false, true, TDs)
@@ -59,7 +59,7 @@ func GetLessons(file *excelize.File, sheet string) []models.TeacherDay {
 
 				} else {
 					Teacher, _ = file.GetCellValue(sheet, fmt.Sprintf("%s%d", models.Columns[2+i*3], 11+14*j+n*2))
-					IsEnglish := TDsParams.EnglishCheck(Teacher)
+					IsEnglish := TDsParams2.EnglishCheck(Teacher)
 					if IsEnglish {
 						Teacher1EN, Teacher2EN := GetEnPrepodFromString(Teacher)
 						TDs = AddTd(j, LessonNum, Class, Teacher1EN, Point, true, true, TDs)

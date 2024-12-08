@@ -22,11 +22,12 @@ var Prepods *excelize.File
 var PlaceColorsDefault = []Place{
 	{
 		Place: "НАХИМОВСКИЙ",
-		Color: "#302D2E",
+		Color: "#d7d7d7",
 	},
 	{
 		Place: "ДИСТАНЦИОННОЕ",
 		Color: "#42AAFF",
 	},
 }
+var Year string
 var PlaceColors []Place
