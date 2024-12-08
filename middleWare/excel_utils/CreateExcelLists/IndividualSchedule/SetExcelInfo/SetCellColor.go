@@ -16,8 +16,7 @@ func SetCellColor(file *excelize.File, col int, row int, color string) *excelize
 			},
 		},
 		)
-		file.SetCellStyle("Sheet1", fmt.Sprintf("%s%d", models.Columns[col], row), fmt.Sprintf("%s%d", models.Columns[col], row), style)
+		file.SetCellStyle("Индивидуальное", fmt.Sprintf("%s%d", models.Columns[col], row), fmt.Sprintf("%s%d", models.Columns[col], row), style)
 	}
-
 	return file
 }

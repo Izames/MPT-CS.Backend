@@ -30,3 +30,24 @@ func Create_user(user models.User) int {
 	}
 	return 201
 }
+func Update_user(user models.User) int {
+	salt := make([]byte, 16)  // Выберите подходящий размер соли
+	_, err := rand.Read(salt) // Заполняем соль случайными байтами
+	if err != nil {
+		log.Fatal("Failed to generate salt: ", err)
+	}
+	// Хешируем пароль с солью
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		log.Fatal("Failed to hash password: ", err)
+	}
+	// Сохраняем соль и хеш пароля в базу данных
+	user.Password = string(hashedPassword)              // Хеш
+	user.Salt = base64.StdEncoding.EncodeToString(salt) // Соль
+
+	if result := DataBase.DB.Model(&user).Updates(models.User{Password: user.Password}).Error; result != nil {
+		log.Println("Error of creating:", result)
+		return 500
+	}
+	return 201
+}

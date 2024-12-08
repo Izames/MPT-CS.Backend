@@ -6,8 +6,9 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-func FillTable(file *excelize.File) {
+func FillTableISC(file *excelize.File) *excelize.File {
 	var TDs []models.TeacherDay
 	TDs = GetExcelInfo.GetTDs()
-	SetTDs(TDs, file)
+	file = SetScheduleISC(TDs, file)
+	return file
 }

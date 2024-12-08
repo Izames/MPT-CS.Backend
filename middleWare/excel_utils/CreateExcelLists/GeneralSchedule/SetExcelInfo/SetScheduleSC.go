@@ -6,12 +6,9 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-func SetTDs(TDs []models.TeacherDay, file *excelize.File) {
-	file.SetCellValue("Sheet1", fmt.Sprintf("%s%d", models.Columns[0], 1), "FSDFSFFDS")
-
+func SetTDsSC(TDs []models.TeacherDay, file *excelize.File) {
 	rows, _ := file.GetRows("Sheet1")
 	rowsCount := len(rows)
-
 	for i := 0; i < len(TDs); i++ {
 		for j := 12; j < rowsCount; j += 1 {
 			RowTeacher, _ := file.GetCellValue("Sheet1", fmt.Sprintf("%s%d", models.Columns[1], j))
@@ -28,20 +25,20 @@ func SetTDs(TDs []models.TeacherDay, file *excelize.File) {
 				if TDs[i].Numerator && !TDs[i].Denominator {
 					row = j
 					file.SetCellValue("Sheet1", fmt.Sprintf("%s%d", models.Columns[col], row), GroupName+Error)
-					file = SetCellColor(file, col, row, Color)
+					file = SetCellColorSC(file, col, row, Color)
 				}
 				if !TDs[i].Numerator && TDs[i].Denominator {
 					row = j + 1
 					file.SetCellValue("Sheet1", fmt.Sprintf("%s%d", models.Columns[col], row), GroupName+Error)
-					file = SetCellColor(file, col, row, Color)
+					file = SetCellColorSC(file, col, row, Color)
 				}
 				if TDs[i].Numerator && TDs[i].Denominator {
 					row = j
 					file.SetCellValue("Sheet1", fmt.Sprintf("%s%d", models.Columns[col], row), GroupName+Error)
-					file = SetCellColor(file, col, row, Color)
+					file = SetCellColorSC(file, col, row, Color)
 					row = j + 1
 					file.SetCellValue("Sheet1", fmt.Sprintf("%s%d", models.Columns[col], row), GroupName+Error)
-					file = SetCellColor(file, col, row, Color)
+					file = SetCellColorSC(file, col, row, Color)
 				}
 				break
 			}

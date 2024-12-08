@@ -10,6 +10,7 @@ func Deserealization(form *multipart.Form) {
 
 	colors := form.Value["colors"]
 	places := form.Value["places"]
+	models.Year = form.Value["year"][0]
 	models.PlaceColors = models.PlaceColorsDefault
 	for i := 0; i < len(colors); i++ {
 		models.PlaceColors = append(models.PlaceColors, models.Place{
@@ -30,4 +31,5 @@ func Deserealization(form *multipart.Form) {
 	models.Prepods = nil
 	f, _ := prepods[0].Open()
 	models.Prepods, _ = excelize.OpenReader(f)
+
 }
