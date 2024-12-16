@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2 # установка golangci-lint
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
       - name: Run linter
         run: |
-          golangci-lint run ./... # Запуск линтера на всем проекте
+          golangci-lint run ./...
