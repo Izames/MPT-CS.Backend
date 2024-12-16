@@ -1,0 +1,29 @@
+name: Go Code Style Check
+
+on:
+  push:
+    branches:
+      - melnichenko
+
+  pull_request:
+    branches:
+      - melnichenko
+
+jobs:
+  checkstyle_project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone repo
+        uses: actions/checkout@v2
+
+      - name: Set version Go
+        uses: actions/setup-go@v4 # Обновленный экшн для Go
+        with:
+          go-version: '1.21' #  Укажите нужную вам версию Go
+
+      - name: Install dependencies
+        run: |
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2 # установка golangci-lint
+      - name: Run linter
+        run: |
+          golangci-lint run ./... # Запуск линтера на всем проекте
