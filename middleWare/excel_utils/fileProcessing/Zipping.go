@@ -18,7 +18,10 @@ func ZippingFiles(file *excelize.File, files []*excelize.File) string {
 	defer os.RemoveAll(tempDir)
 
 	individualsDir := filepath.Join(tempDir, "individuals")
-	os.Mkdir(individualsDir, 0755)
+	err = os.Mkdir(individualsDir, 0755)
+	if err != nil {
+		log.Fatal(err)
+	}
 	for i := 0; i < len(files); i++ {
 		name, _ := files[i].GetCellValue("Sheet1", fmt.Sprintf("%s%d", models.Columns[1], 2))
 		filePath := filepath.Join(individualsDir, name+".xlsx")
