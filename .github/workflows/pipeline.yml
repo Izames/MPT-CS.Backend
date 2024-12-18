@@ -22,7 +22,7 @@ jobs:
           go mod download
           go mod vendor
       - name: install lint
-        run: go install -mod=mod github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
+        run: go install -mod=mod github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
       - name: Run linter
         run: golangci-lint run ./...
