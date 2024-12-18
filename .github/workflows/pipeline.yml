@@ -14,7 +14,7 @@ jobs:
       - name: Set version
         uses: actions/setup-go@v5
         with:
-          go-version: '1.21'
+          go-version: '1.23.1'
 
       - name: Install dependencies
         run: |
@@ -22,7 +22,7 @@ jobs:
           go mod download
           go mod vendor
       - name: install lint
-        run: go install -mod=mod github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+        run: go install -mod=mod github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
 
       - name: Run linter
         run: golangci-lint run ./...
