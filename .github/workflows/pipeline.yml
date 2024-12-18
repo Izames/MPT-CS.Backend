@@ -3,10 +3,10 @@ name: Go Pipeline with Dependencies
 on:
   push:
     branches:
-      - main
+      - melnichenko
   pull_request:
     branches:
-      - main
+      - melnichenko
 
 jobs:
   build:
