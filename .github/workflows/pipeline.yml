@@ -11,7 +11,7 @@ jobs:
       - name: Git clone repo
         uses: actions/checkout@v2
 
-      - name: Set version Пщ
+      - name: Set version
         uses: actions/setup-go
         with:
           go-version: '1.21'
