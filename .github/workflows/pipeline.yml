@@ -1,29 +1,29 @@
-name: Go Code Style Check
+name: Go Pipeline with Dependencies
 
 on:
   push:
     branches:
-      - melnichenko
-
+      - main
   pull_request:
     branches:
-      - melnichenko
+      - main
 
 jobs:
-  checkstyle_project:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Git clone repo
-        uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set version Go
-        uses: actions/setup-go@v4 # Обновленный экшн для Go
+      - name: Setup Go
+        uses: actions/setup-go@v4
         with:
-          go-version: '1.21' #  Укажите нужную вам версию Go
+          go-version: '1.21' # Или нужная вам версия Go
 
-      - name: Install dependencies
+      - name: Get dependencies
         run: |
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
-      - name: Run linter
-        run: |
-          golangci-lint run ./...
+          go mod tidy
+          go mod download
+
+      - name: Build the project
+        run: go build -v ./...
