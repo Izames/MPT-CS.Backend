@@ -24,6 +24,8 @@ jobs:
         run: |
           go mod tidy
           go mod download
+          go get -u github.com/xuri/excelize/v2 v2.9.0 
+
 
       - name: Install golangci-lint
         run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.55.2
