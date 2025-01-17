@@ -24,6 +24,10 @@ func Register(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"error": "такой пользователь уже есть"})
 		return
 	}
+	if len(input.Password) < 6 {
+		context.JSON(http.StatusBadRequest, gin.H{"error": "пароль должен быть длиннее 6 символов"})
+		return
+	}
 
 	user := models.User{
 		Email:    input.Email,

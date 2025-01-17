@@ -9,4 +9,5 @@ type ResetPassword struct {
 type PinCodeInput struct {
 	Pin      string `json:"pin"`
 	Usermail string `json:"UserMail" binding:"required"`
+	Password string `json:"Password"`
 }
