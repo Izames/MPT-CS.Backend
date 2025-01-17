@@ -39,7 +39,7 @@ func StylerSC(file *excelize.File, teachers []string, StartRow int) *excelize.Fi
 		},
 		Alignment: &excelize.Alignment{
 			Vertical:   "center",
-			Horizontal: "center",
+			Horizontal: "left",
 		},
 	})
 

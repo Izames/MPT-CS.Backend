@@ -14,8 +14,18 @@ func SetCellColor(file *excelize.File, col int, row int, color string) *excelize
 				Color:   []string{color},
 				Pattern: 1,
 			},
+			Font: &excelize.Font{
+				Size: 10,
+			},
 		},
 		)
+		file.SetCellStyle("Индивидуальное", fmt.Sprintf("%s%d", models.Columns[col], row), fmt.Sprintf("%s%d", models.Columns[col], row), style)
+	} else {
+		style, _ := file.NewStyle(&excelize.Style{
+			Font: &excelize.Font{
+				Size: 10,
+			},
+		})
 		file.SetCellStyle("Индивидуальное", fmt.Sprintf("%s%d", models.Columns[col], row), fmt.Sprintf("%s%d", models.Columns[col], row), style)
 	}
 	return file

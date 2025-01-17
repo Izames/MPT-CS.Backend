@@ -6,6 +6,7 @@ import (
 	"MPT-CS/middleWare"
 	"MPT-CS/models"
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 	"time"
 )
@@ -19,14 +20,17 @@ func CheckPin(context *gin.Context) {
 
 	pin, err := FindPinByMail(input.Usermail)
 	if err != nil {
+		log.Println("срок действия пин кода прошел!")
 		context.JSON(http.StatusBadRequest, gin.H{"error": "срок действия пин кода прошел!"})
 		return
 	}
 	if pin.Pin != input.Pin {
+		log.Println("пин коды не соответствуют")
 		context.JSON(http.StatusBadRequest, gin.H{"error": "пин коды не соответствуют"})
 		return
 	}
 	if len(input.Password) < 6 {
+		log.Println("пароль должен быть длиннее 6 символов")
 		context.JSON(http.StatusBadRequest, gin.H{"error": "пароль должен быть длиннее 6 символов"})
 		return
 	}

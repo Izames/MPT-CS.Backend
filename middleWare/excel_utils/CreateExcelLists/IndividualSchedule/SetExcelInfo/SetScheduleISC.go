@@ -39,6 +39,5 @@ func SetScheduleISC(TDs []models.TeacherDay, file *excelize.File) *excelize.File
 			}
 		}
 	}
-	file.SetCellValue("Индивидуальное", fmt.Sprintf("%s%d", models.Columns[0], 1), "dfsdf")
 	return file
 }
