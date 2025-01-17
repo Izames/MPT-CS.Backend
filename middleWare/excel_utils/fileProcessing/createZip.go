@@ -23,7 +23,7 @@ func createZip(sourceDir string) string {
 	zipWriter := zip.NewWriter(zipFile)
 	defer zipWriter.Close()
 
-	filepath.Walk(sourceDir, func(path string, info fs.FileInfo, err error) error {
+	err = filepath.Walk(sourceDir, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
@@ -56,5 +56,8 @@ func createZip(sourceDir string) string {
 		_, err = io.Copy(writer, file)
 		return err
 	})
+	if err != nil {
+		panic(err)
+	}
 	return zipFilePath
 }

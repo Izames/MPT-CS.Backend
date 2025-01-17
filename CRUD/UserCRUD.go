@@ -10,19 +10,17 @@ import (
 )
 
 func Create_user(user models.User) int {
-	salt := make([]byte, 16)  // Выберите подходящий размер соли
-	_, err := rand.Read(salt) // Заполняем соль случайными байтами
+	salt := make([]byte, 16)
+	_, err := rand.Read(salt)
 	if err != nil {
 		log.Fatal("Failed to generate salt: ", err)
 	}
-	// Хешируем пароль с солью
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
 		log.Fatal("Failed to hash password: ", err)
 	}
-	// Сохраняем соль и хеш пароля в базу данных
-	user.Password = string(hashedPassword)              // Хеш
-	user.Salt = base64.StdEncoding.EncodeToString(salt) // Соль
+	user.Password = string(hashedPassword)
+	user.Salt = base64.StdEncoding.EncodeToString(salt)
 
 	if result := DataBase.DB.Create(&user).Error; result != nil {
 		log.Println("Error of creating:", result)
