@@ -1,7 +1,6 @@
 package ResetPassword
 
 import (
-	"MPT-CS/CRUD"
 	"MPT-CS/DataBase"
 	"MPT-CS/middleWare"
 	"MPT-CS/models"
@@ -36,7 +35,7 @@ func CheckPin(context *gin.Context) {
 	}
 	user, _ := middleWare.FindUserByUsername(input.Usermail)
 	user.Password = input.Password
-	result := CRUD.Update_user(user)
+	result := DataBase.Update_user(user)
 	context.JSON(http.StatusOK, gin.H{"result": result})
 }
 

@@ -1,7 +1,7 @@
 package middleWare
 
 import (
-	"MPT-CS/CRUD"
+	"MPT-CS/DataBase"
 	"MPT-CS/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -34,7 +34,7 @@ func Register(context *gin.Context) {
 		Password: input.Password,
 	}
 
-	savedUser := CRUD.Create_user(user)
+	savedUser := DataBase.Create_user(user)
 
 	context.JSON(http.StatusCreated, gin.H{"user": savedUser})
 }

@@ -1,7 +1,6 @@
-package CRUD
+package DataBase
 
 import (
-	"MPT-CS/DataBase"
 	"MPT-CS/models"
 	"crypto/rand"
 	"encoding/base64"
@@ -22,7 +21,7 @@ func Create_user(user models.User) int {
 	user.Password = string(hashedPassword)
 	user.Salt = base64.StdEncoding.EncodeToString(salt)
 
-	if result := DataBase.DB.Create(&user).Error; result != nil {
+	if result := DB.Create(&user).Error; result != nil {
 		log.Println("Error of creating:", result)
 		return 500
 	}
@@ -43,7 +42,7 @@ func Update_user(user models.User) int {
 	user.Password = string(hashedPassword)              // Хеш
 	user.Salt = base64.StdEncoding.EncodeToString(salt) // Соль
 
-	if result := DataBase.DB.Model(&user).Updates(models.User{Password: user.Password}).Error; result != nil {
+	if result := DB.Model(&user).Updates(models.User{Password: user.Password}).Error; result != nil {
 		log.Println("Error of creating:", result)
 		return 500
 	}
